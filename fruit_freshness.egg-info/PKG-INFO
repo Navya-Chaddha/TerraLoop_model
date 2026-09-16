@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: fruit-freshness
+Version: 2.0.0
+Summary: Produce detection with supported fruit freshness analysis
+Requires-Python: >=3.10
+Requires-Dist: torch>=2.2.0
+Requires-Dist: torchvision>=0.17.0
+Requires-Dist: Pillow>=10.0.0
+Requires-Dist: fastapi>=0.110.0
+Requires-Dist: uvicorn[standard]>=0.27.0
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: kagglehub>=1.0.2
+Requires-Dist: ultralytics>=8.4.0
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: opencv-contrib-python>=4.8.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: httpx>=0.27.0; extra == "dev"
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

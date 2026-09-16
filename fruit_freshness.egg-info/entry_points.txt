@@ -1,0 +1,4 @@
+[console_scripts]
+fruit-category-train = src.train_detector:main
+fruit-freshness-serve = deployment.app:main
+fruit-freshness-train = src.train_freshness:main

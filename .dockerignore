@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+env
+data
+checkpoints
+models
+runs
+**/__pycache__
+.pytest_cache
+.env
+.env.*
+*.zip
+.DS_Store

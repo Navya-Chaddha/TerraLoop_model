@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fruit freshness</title><link rel="stylesheet" href="/static/styles.css"></head>
+<body><main>
+  <header><div><p class="eyebrow">PRODUCE VISION</p><h1>Fruit freshness checker</h1><p class="intro">Use your camera to identify produce and check visible freshness indicators.</p></div><span class="model-pill">● ML model ready</span></header>
+  <div class="toolbar"><button id="open">Open camera</button><button id="stop" class="secondary" disabled>Stop camera</button><p id="status">Loading model…</p></div>
+  <div class="workspace">
+    <section class="panel camera-panel"><div class="panel-heading"><div><h2>Camera</h2><p>Center one fruit in the frame.</p></div><span class="live-dot">LIVE</span></div><div id="camera" hidden><div class="video-wrap"><video id="video" autoplay muted playsinline></video><span class="guide">Place produce here</span></div><canvas id="canvas" hidden></canvas><button id="snap" class="capture" disabled>Capture snapshot</button></div><div id="camera-empty">Open the camera to begin.</div></section>
+    <section class="panel analysis-panel"><div class="panel-heading"><div><h2>Analysis</h2><p>Results from your latest snapshot.</p></div></div><section id="result" hidden></section><div id="analysis-empty">Your detection and freshness results will appear here.</div></section>
+  </div>
+  <footer>Visible appearance only. This cannot confirm hidden mold, internal spoilage, smell, softness or food safety.</footer>
+</main><script src="/static/app.js"></script></body></html>

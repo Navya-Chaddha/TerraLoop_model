@@ -1,0 +1,49 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  secret-scan:
+    name: Secret Scanning (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for accurate secret scanning
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
+          GITLEAKS_ENABLE_SUMMARY: true
+
+  sast-scan:
+    name: SAST Scanning (Semgrep)
+    runs-on: ubuntu-latest
+    # Wait for secret scanning to finish before running SAST
+    needs: secret-scan
+    container:
+      # Use a container image with semgrep installed
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        # Runs Semgrep with standard security/CI rules for Python, TypeScript and general safety
+        run: semgrep ci --config "p/ci"
+        env:
+          # Optional: Add your SEMGREP_APP_TOKEN if you are using Semgrep Cloud Platform
+          # SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+          SEMGREP_RULES: >- 
+            p/python
+            p/typescript
+            p/security-audit
